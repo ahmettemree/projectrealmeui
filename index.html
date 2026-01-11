@@ -3,33 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Origin OS Web - Liquid Glass Demo</title>
+  <title>Ahmet's Home Screen Demo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Dynamic Island / Notch -->
-  <div class="dynamic-island">
-    <div class="time">18:88</div>
-    <div class="status">5G • 69% 🔋</div>
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <div class="time large">23:24</div> <!-- JS ile güncellenecek -->
+    <div class="icons">WiFi VoLTE %58 🔋</div>
   </div>
 
-  <!-- Ana Ekran - Atomic Widget Grid -->
+  <!-- Duolingo Widget -->
+  <div class="duolingo-widget">
+    <img src="https://preview.redd.it/the-widget-is-finally-on-android-v0-3isn9kqn2qpa1.png?width=325&format=png&auto=webp&s=e74c3bc0f6a3f27f050ca8dfacc988698f2e2b7c" alt="Duolingo Streak">
+    <span>Uo 56 Son yara gel!</span>
+  </div>
+
+  <!-- Wallpaper Area (Arka plan zaten body'de) -->
   <div class="home-screen">
-    <div class="atomic-grid">
-      <div class="widget large glass">Hava<br><span>12°C Güneşli ☀️</span></div>
-      <div class="widget medium glass">Müzik<br>Şimdi Çalıyor: Tost Satış Şarkısı</div>
-      <div class="app glass"><img src="https://via.placeholder.com/100?text=Kamera" alt=""><span>Kamera</span></div>
-      <div class="app glass"><img src="https://via.placeholder.com/100?text=Galeri" alt=""><span>Galeri</span></div>
-      <div class="widget small glass">Takvim<br>11 Ocak 2026</div>
-      <!-- Daha fazla ekle: 4-5 sütun yap, sürükle-bırak için JS ekleyebilirsin sonra -->
+    <!-- Folder Row -->
+    <div class="folder-row">
+      <div class="folder">
+        <div class="small-icons">
+          <img src="https://www.wikihow.com/images/thumb/d/d7/Organize-Apps-on-Samsung-Galaxy-Step-18-Version-2.jpg/v4-460px-Organize-Apps-on-Samsung-Galaxy-Step-18-Version-2.jpg" alt="Settings icons">
+        </div>
+        <span>Settings/...</span>
+      </div>
+      <div class="folder">
+        <div class="small-icons">
+          <img src="https://static0.anpoimages.com/wordpress/wp-content/uploads/2025/11/illustration-of-a-samsung-app-folder-being-customized-showing-social-media-icons-grouped-together-color-options-and-floating-3d-shapes-around.png?w=1600&h=1200&fit=crop" alt="Shopping icons">
+        </div>
+        <span>Shopping</span>
+      </div>
+      <div class="folder">
+        <div class="small-icons">
+          <img src="https://blog.bestbuy.ca/wp-content/uploads/2018/05/Creating-a-folder.jpg" alt="Productivity icons">
+        </div>
+        <span>Productiv...</span>
+      </div>
+      <div class="folder">
+        <div class="small-icons">
+          <img src="https://static0.anpoimages.com/wordpress/wp-content/uploads/2025/11/illustration-of-a-samsung-app-folder-being-customized-showing-social-media-icons-grouped-together-color-options-and-floating-3d-shapes-around.png?w=1600&h=1200&fit=crop" alt="Games icons">
+        </div>
+        <span>Games</span>
+      </div>
+      <div class="folder">
+        <div class="small-icons">
+          <img src="https://static0.anpoimages.com/wordpress/wp-content/uploads/2025/11/illustration-of-a-samsung-app-folder-being-customized-showing-social-media-icons-grouped-together-color-options-and-floating-3d-shapes-around.png?w=1600&h=1200&fit=crop" alt="Social icons">
+        </div>
+        <span>Social</span>
+      </div>
+    </div>
+
+    <!-- App Grid -->
+    <div class="app-grid">
+      <div class="app"><img src="https://static0.xdaimages.com/wordpress/wp-content/uploads/2019/09/play-store-dark-mode.jpg?w=1200&h=675&fit=crop" alt="Play Store"><span>Play Store</span></div>
+      <div class="app"><img src="https://i.extremetech.com/imagery/content-types/02SEodWhkrcy1kZaGpArolK/hero-image.fit_lim.v1764630000.png" alt="Hava"><span>Hava dur...</span></div>
+      <div class="app"><img src="https://images.moneycontrol.com/static-mcnews/2025/05/20250513010941_googlelogo.jpg?impolicy=website&width=770&height=431" alt="Google"><span>Google</span></div>
+      <div class="app"><img src="https://i0.wp.com/www.gottabemobile.com/wp-content/uploads/2014/07/chrome-beta-logo.jpg?fit=1000%2C575&ssl=1" alt="Chrome Beta"><span>Chrome ...</span></div>
+      <!-- Alt row -->
+      <div class="app"><img src="https://i.extremetech.com/imagery/content-types/02SEodWhkrcy1kZaGpArolK/hero-image.fit_lim.v1764630000.png" alt="Fazilet"><span>Fazilet...</span></div> <!-- Takvim gibi, weather ikonunu placeholder koydum -->
+      <div class="app"><img src="https://devimages-cdn.apple.com/wwdc-services/articles/images/53451A61-E510-4045-BE05-5C7837FB614B/2048.jpeg" alt="Duolingo"><span>Duolingo</span></div>
+      <div class="app"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/02/d3/3e/02d33e3f-c0f9-aad3-e760-8aeb27ac5b6d/AppIcon-0-0-1x_U007epad-0-1-85-220.png/1200x630wa.jpg" alt="Proton VPN"><span>Proton V...</span></div>
+      <div class="app"><img src="https://static0.anpoimages.com/wordpress/wp-content/uploads/2017/03/nexus2cee_android-o-files.png" alt="Files"><span>Files</span></div>
+      <div class="app"><img src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/21939811/newgmaillogo.jpg?quality=90&strip=all&crop=0,0,100,100" alt="Gmail"><span>Gmail</span></div>
     </div>
   </div>
 
-  <!-- Dock - Liquid Glass -->
-  <div class="dock glass">
-    <div class="dock-item">📞</div>
-    <div class="dock-item">💬</div>
-    <div class="dock-item">🌐</div>
+  <!-- Dock -->
+  <div class="dock">
+    <div class="dock-item"><img src="https://www.sketchappsources.com/resources/source-image/ultimate-app-icon-set.jpg" alt="Phone"></div> <!-- Placeholder, gerçek phone ikon -->
+    <div class="dock-item"><img src="https://www.shutterstock.com/image-vector/simple-green-messagechat-icon-three-260nw-430586587.jpg" alt="Messages"></div>
+    <div class="dock-item">🌪️</div> <!-- Fan? Emoji placeholder -->
+    <div class="dock-item">⚪</div> <!-- Daire ikon placeholder -->
   </div>
 
   <script src="script.js"></script>
