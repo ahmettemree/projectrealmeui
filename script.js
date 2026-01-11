@@ -1,60 +1,53 @@
-// SAYFA YÜKLENDİĞİNDE
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Android Simülatörü Yüklendi');
+// BASİT VE GARANTİ ÇÖZÜM
+console.log("Realme UI Simulator Yüklendi");
+
+// Sayfa yüklendiğinde
+window.onload = function() {
+    console.log("Sayfa yüklendi");
+    
+    // Otomatik aç (5 saniye sonra)
+    setTimeout(function() {
+        console.log("Otomatik açılıyor...");
+        unlockPhone();
+    }, 5000);
     
     // Saati güncelle
     updateTime();
     setInterval(updateTime, 60000);
+};
+
+// Kilidi aç
+function unlockPhone() {
+    console.log("unlockPhone çağrıldı");
     
-    // Tema kontrolü
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    const lockScreen = document.getElementById('lockScreen');
+    const homeScreen = document.getElementById('homeScreen');
     
-    // Session kontrolü - daha önce kilit açıldı mı?
-    const isUnlocked = sessionStorage.getItem('unlocked') === 'true';
-    
-    if (isUnlocked) {
-        showHomeScreen();
-    } else {
-        showLockScreen();
+    if (!lockScreen || !homeScreen) {
+        console.error("Elementler bulunamadı!");
+        return;
     }
     
-    // PARMAK İZİ BUTONU
-    const fingerprintBtn = document.getElementById('fingerprintBtn');
+    console.log("Elementler bulundu, açılıyor...");
     
-    // Tıklama ile aç
-    fingerprintBtn.addEventListener('click', function() {
-        startFingerprintScan();
-    });
+    // 1. Kilit ekranını gizle
+    lockScreen.style.opacity = '0';
+    lockScreen.style.transform = 'translateY(-100%)';
+    lockScreen.style.transition = 'all 0.5s ease';
     
-    // Basılı tutma ile aç
-    let pressTimer;
+    // 2. Ana ekranı göster
+    homeScreen.style.transform = 'translateY(0)';
+    homeScreen.style.transition = 'all 0.5s ease';
     
-    fingerprintBtn.addEventListener('mousedown', function() {
-        pressTimer = setTimeout(function() {
-            startFingerprintScan();
-        }, 3000); // 3 saniye basılı tutunca
-    });
-    
-    fingerprintBtn.addEventListener('touchstart', function() {
-        pressTimer = setTimeout(function() {
-            startFingerprintScan();
-        }, 3000);
-    });
-    
-    fingerprintBtn.addEventListener('mouseup', function() {
-        clearTimeout(pressTimer);
-    });
-    
-    fingerprintBtn.addEventListener('touchend', function() {
-        clearTimeout(pressTimer);
-    });
-    
-    // Kilit ekranı kaydırma
-    initSwipe();
-});
+    // 3. Class'ları değiştir
+    setTimeout(function() {
+        lockScreen.classList.remove('active');
+        homeScreen.classList.add('active');
+        console.log("Açıldı!");
+    }, 500);
+}
 
-// SAATİ GÜNCELLE
+// Saati güncelle
 function updateTime() {
     const now = new Date();
     const timeString = now.toLocaleTimeString('tr-TR', { 
@@ -69,35 +62,51 @@ function updateTime() {
         month: 'long'
     });
     
-    // Tüm saatleri güncelle
     document.querySelectorAll('.lock-time, .status-left').forEach(el => {
-        el.textContent = timeString;
+        if (el) el.textContent = timeString;
     });
     
-    // Tarihi güncelle
     const dateEl = document.querySelector('.lock-date');
-    if (dateEl) {
-        dateEl.textContent = dateString;
-    }
+    if (dateEl) dateEl.textContent = dateString;
 }
 
-// PARMAK İZİ TARAMA
-function startFingerprintScan() {
+// Parmak izi butonu
+document.addEventListener('DOMContentLoaded', function() {
     const fingerprintBtn = document.getElementById('fingerprintBtn');
-    
-    // Tarama animasyonu başlat
-    fingerprintBtn.classList.add('scanning');
-    
-    // 3 saniye sonra kilidi aç
-    setTimeout(function() {
-        unlockPhone();
-        fingerprintBtn.classList.remove('scanning');
-    }, 3000);
+    if (fingerprintBtn) {
+        fingerprintBtn.addEventListener('click', function() {
+            console.log("Parmak izine tıklandı");
+            this.classList.add('scanning');
+            
+            setTimeout(function() {
+                unlockPhone();
+                fingerprintBtn.classList.remove('scanning');
+            }, 3000);
+        });
+    }
+});
+
+// Kontrol butonları
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const newTheme = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
 }
 
-// KİLİDİ AÇ
-function unlockPhone() {
+function lockScreen() {
     const lockScreen = document.getElementById('lockScreen');
     const homeScreen = document.getElementById('homeScreen');
     
-    lockScreen.style.transition = 'transform 0.5s cubic-bezier(0
+    homeScreen.classList.remove('active');
+    lockScreen.classList.add('active');
+    
+    lockScreen.style.opacity = '1';
+    lockScreen.style.transform = 'translateY(0)';
+    
+    sessionStorage.removeItem('unlocked');
+}
+
+function refreshPage() {
+    location.reload();
+        }
