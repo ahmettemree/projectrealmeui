@@ -1,139 +1,206 @@
-// OTOMATİK AÇ
-window.addEventListener('load', function() {
-    console.log("SAYFA YÜKLENDİ - OTOMATİK AÇILIYOR");
-    
-    // 3 saniye sonra otomatik aç
-    setTimeout(function() {
-        console.log("OTOMATİK AÇILIYOR...");
-        
-        // Kilit ekranını gizle
-        var lock = document.getElementById('lockScreen');
-        var home = document.getElementById('homeScreen');
-        
-        if (lock && home) {
-            lock.style.display = 'none';
-            lock.style.opacity = '0';
-            lock.style.transform = 'translateY(-100%)';
-            
-            home.style.display = 'flex';
-            home.style.opacity = '1';
-            home.style.transform = 'translateY(0)';
-            
-            console.log("BAŞARIYLA AÇILDI!");
-            alert("TELEFON AÇILDI!");
-        }
-    }, 3000);
-});
-// BASİT VE GARANTİ ÇÖZÜM
-console.log("Realme UI Simulator Yüklendi");
+// BASİT VE GARANTİ ÇALIŞAN
+console.log("Android Simülatörü Yüklendi");
 
 // Sayfa yüklendiğinde
-window.onload = function() {
-    console.log("Sayfa yüklendi");
-    
-    // Otomatik aç (5 saniye sonra)
-    setTimeout(function() {
-        console.log("Otomatik açılıyor...");
-        unlockPhone();
-    }, 5000);
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM yüklendi");
     
     // Saati güncelle
     updateTime();
     setInterval(updateTime, 60000);
-};
-
-// Kilidi aç
-function unlockPhone() {
-    console.log("unlockPhone çağrıldı");
     
-    const lockScreen = document.getElementById('lockScreen');
-    const homeScreen = document.getElementById('homeScreen');
+    // Kaydırma event'i
+    initSwipe();
     
-    if (!lockScreen || !homeScreen) {
-        console.error("Elementler bulunamadı!");
-        return;
-    }
-    
-    console.log("Elementler bulundu, açılıyor...");
-    
-    // 1. Kilit ekranını gizle
-    lockScreen.style.opacity = '0';
-    lockScreen.style.transform = 'translateY(-100%)';
-    lockScreen.style.transition = 'all 0.5s ease';
-    
-    // 2. Ana ekranı göster
-    homeScreen.style.transform = 'translateY(0)';
-    homeScreen.style.transition = 'all 0.5s ease';
-    
-    // 3. Class'ları değiştir
+    // 5 saniye sonra otomatik aç (test için)
     setTimeout(function() {
-        lockScreen.classList.remove('active');
-        homeScreen.classList.add('active');
-        console.log("Açıldı!");
-    }, 500);
-}
+        console.log("Test: Otomatik açılıyor...");
+        // unlockPhone(); // Test etmek için aç
+    }, 5000);
+});
 
 // Saati güncelle
 function updateTime() {
     const now = new Date();
-    const timeString = now.toLocaleTimeString('tr-TR', { 
+    const time = now.toLocaleTimeString('tr-TR', { 
         hour: '2-digit', 
         minute: '2-digit',
         hour12: false 
     });
     
-    const dateString = now.toLocaleDateString('tr-TR', {
-        weekday: 'long',
+    const date = now.toLocaleDateString('tr-TR', {
         day: 'numeric',
-        month: 'long'
+        month: 'short',
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+    }).replace(',', '®');
+    
+    // Tüm zamanları güncelle
+    document.querySelectorAll('.time, .lock-time').forEach(el => {
+        el.textContent = time;
     });
     
-    document.querySelectorAll('.lock-time, .status-left').forEach(el => {
-        if (el) el.textContent = timeString;
+    document.querySelectorAll('.lock-date').forEach(el => {
+        el.textContent = date;
     });
-    
-    const dateEl = document.querySelector('.lock-date');
-    if (dateEl) dateEl.textContent = dateString;
 }
 
-// Parmak izi butonu
-document.addEventListener('DOMContentLoaded', function() {
-    const fingerprintBtn = document.getElementById('fingerprintBtn');
-    if (fingerprintBtn) {
-        fingerprintBtn.addEventListener('click', function() {
-            console.log("Parmak izine tıklandı");
-            this.classList.add('scanning');
-            
-            setTimeout(function() {
-                unlockPhone();
-                fingerprintBtn.classList.remove('scanning');
-            }, 3000);
-        });
+// PARMAK İZİ İLE AÇ
+function unlockWithFingerprint() {
+    console.log("Parmak izi ile açılıyor...");
+    
+    const btn = document.querySelector('.fingerprint-btn');
+    const icon = document.querySelector('.fingerprint-icon');
+    
+    // Animasyon başlat
+    btn.style.background = '#4CAF50';
+    icon.style.color = 'white';
+    icon.style.transform = 'scale(1.2)';
+    
+    // 2 saniye bekle
+    setTimeout(function() {
+        unlockPhone();
+        
+        // Animasyonu sıfırla
+        setTimeout(function() {
+            btn.style.background = '';
+            icon.style.color = '';
+            icon.style.transform = '';
+        }, 500);
+    }, 2000);
+}
+
+// KİLİDİ AÇ
+function unlockPhone() {
+    console.log("Kilidi açıyor...");
+    
+    const lock = document.getElementById('lockScreen');
+    const home = document.getElementById('homeScreen');
+    
+    if (!lock || !home) {
+        console.error("Elementler bulunamadı!");
+        return;
     }
-});
-
-// Kontrol butonları
-function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    const newTheme = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+    
+    // Kilit ekranını kapat
+    lock.style.opacity = '0';
+    lock.style.transform = 'translateY(-20px)';
+    lock.style.transition = 'all 0.5s ease';
+    
+    setTimeout(function() {
+        lock.classList.remove('active');
+        lock.style.display = 'none';
+        
+        // Ana ekranı aç
+        home.style.display = 'flex';
+        home.style.opacity = '0';
+        home.style.transform = 'translateY(20px)';
+        
+        setTimeout(function() {
+            home.classList.add('active');
+            home.style.opacity = '1';
+            home.style.transform = 'translateY(0)';
+            home.style.transition = 'all 0.5s ease';
+            
+            console.log("Başarıyla açıldı!");
+        }, 50);
+    }, 500);
 }
 
-// YENİSİ (garanti çalışan):
+// EKRANI KİLİTLE
 function lockScreen() {
-    console.log("Kilitle butonuna tıklandı!");
+    console.log("Ekranı kilitle...");
     
+    const lock = document.getElementById('lockScreen');
+    const home = document.getElementById('homeScreen');
+    
+    // Uygulama penceresini kapat
+    const appWindow = document.getElementById('appWindow');
+    if (appWindow) appWindow.style.display = 'none';
+    
+    // Ana ekranı kapat
+    home.style.opacity = '0';
+    home.style.transform = 'translateY(20px)';
+    home.style.transition = 'all 0.5s ease';
+    
+    setTimeout(function() {
+        home.classList.remove('active');
+        home.style.display = 'none';
+        
+        // Kilit ekranını aç
+        lock.style.display = 'flex';
+        lock.style.opacity = '0';
+        lock.style.transform = 'translateY(20px)';
+        
+        setTimeout(function() {
+            lock.classList.add('active');
+            lock.style.opacity = '1';
+            lock.style.transform = 'translateY(0)';
+            lock.style.transition = 'all 0.5s ease';
+            
+            console.log("Başarıyla kilitlendi!");
+        }, 50);
+    }, 500);
+}
+
+// KAYDIRMA SİSTEMİ
+function initSwipe() {
     const lockScreen = document.getElementById('lockScreen');
-    const homeScreen = document.getElementById('homeScreen');
+    let startY = 0;
     
-    // 1. Önce tüm açık uygulamaları kapat
-    document.querySelectorAll('.app-window').forEach(app => {
-        app.classList.remove('active');
-        app.style.transform = 'translateY(100%)';
+    lockScreen.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
     });
     
-
-function refreshPage() {
-    location.reload();
+    lockScreen.addEventListener('touchend', function(e) {
+        const endY = e.changedTouches[0].clientY;
+        const diff = startY - endY;
+        
+        if (diff > 50) { // Yukarı kaydırma
+            console.log("Yukarı kaydırıldı, açılıyor...");
+            unlockPhone();
         }
+    });
+}
+
+// Uygulama aç
+function openApp(appName) {
+    console.log("Uygulama aç:", appName);
+    alert(appName + " uygulaması açılıyor...");
+    
+    // Basit demo
+    const content = document.getElementById('appContent');
+    const title = document.getElementById('appTitle');
+    const window = document.getElementById('appWindow');
+    
+    if (content && title && window) {
+        title.textContent = appName;
+        content.textContent = appName + " uygulaması yükleniyor...";
+        window.style.display = 'flex';
+    }
+}
+
+function closeApp() {
+    document.getElementById('appWindow').style.display = 'none';
+}
+
+function openSearch() {
+    openApp('Google Arama');
+}
+
+function openGoogle() {
+    openApp('Google');
+}
+
+function openFolder(folder) {
+    openApp(folder + ' Klasörü');
+}
+
+function toggleTheme() {
+    alert("Tema değiştirilecek (sonra eklenir)");
+}
+
+// EMERGENCY UNLOCK için global fonksiyon
+window.unlockPhone = unlockPhone;
+window.lockScreen = lockScreen;
