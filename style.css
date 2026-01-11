@@ -1,44 +1,59 @@
-* { margin:0; padding:0; box-sizing:border-box; }
 body, html {
-  height:100%; overflow:hidden; font-family: system-ui, sans-serif;
-  background: url('https://www.hdcarwallpapers.com/download/porsche_911_gt3_rs_blue-3840x2160.jpg') no-repeat center/cover; /* Porsche wallpaper */
-  color: white;
+  margin: 0; padding: 0; height: 100%; overflow: hidden;
+  background: url('https://www.shutterstock.com/image-vector/black-white-star-galaxy-dark-260nw-2679848451.jpg') no-repeat center/cover; /* Siyah yıldızlı dark wallpaper */
+  font-family: system-ui, sans-serif; color: white;
+  background-color: #000;
 }
 
 .status-bar {
-  position: fixed; top: 0; width:100%; height:40px; padding:0 15px;
-  display:flex; justify-content:space-between; align-items:center;
-  background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); font-size:14px; z-index:100;
+  position: fixed; top: 10px; left: 0; right: 0; text-align: center;
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); padding: 5px; font-size: 14px; z-index: 10;
 }
 
-.time.large { font-size: 60px; font-weight: bold; position: absolute; top: 50px; left: 20px; } /* Büyük saat */
+.clock {
+  position: absolute; top: 80px; left: 20px; font-size: 80px; font-weight: bold;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
 
 .duolingo-widget {
-  position: absolute; top: 50px; right: 20px; width: 150px; background: rgba(128,0,128,0.8); border-radius: 20px; padding: 10px;
-  text-align: center; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-.duolingo-widget img { width: 100%; border-radius: 10px; }
-
-.home-screen { height:100vh; padding:150px 15px 100px; overflow-y:auto; }
-
-.folder-row { display: flex; justify-content: space-around; margin-bottom: 20px; }
-
-.folder { text-align: center; width: 70px; }
-.small-icons img { width: 60px; height: 40px; object-fit: cover; border-radius: 10px; } /* Küçük grup ikonlar */
-.folder span { font-size: 12px; display: block; margin-top: 5px; }
-
-.app-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; place-items: center;
+  position: absolute; top: 70px; right: 20px; width: 160px; height: 140px;
+  background: rgba(128,0,128,0.8); border-radius: 24px; backdrop-filter: blur(15px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5); padding: 10px; text-align: center;
 }
 
-.app { text-align: center; width: 80px; }
-.app img { width: 60px; height: 60px; border-radius: 15px; background: rgba(0,0,0,0.3); }
-.app span { font-size: 12px; display: block; margin-top: 5px; }
+.widget-inner { position: relative; height: 100%; }
+.streak { font-size: 40px; font-weight: bold; display: block; color: #fff; }
+.text { font-size: 14px; display: block; margin: 5px 0; color: #ddd; }
+.owl { font-size: 60px; position: absolute; bottom: 10px; right: 10px; }
+
+.folders {
+  position: absolute; top: 240px; left: 0; right: 0; display: flex; justify-content: space-around;
+  padding: 0 20px;
+}
+
+.folder {
+  background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 16px;
+  padding: 10px 15px; font-size: 12px; text-align: center; min-width: 60px;
+}
+
+.apps {
+  position: absolute; top: 320px; left: 0; right: 0; display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; padding: 0 20px; place-items: center;
+}
+
+.app {
+  width: 70px; height: 70px; background: rgba(255,255,255,0.08); border-radius: 30px; /* Yuvarlak ikon şekli, senin gibi */
+  backdrop-filter: blur(12px); box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center; font-size: 12px; text-align: center;
+  transition: transform 0.2s;
+}
+
+.app:hover { transform: scale(1.1); }
 
 .dock {
   position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-  background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); padding: 10px 30px; border-radius: 30px;
-  display: flex; gap: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); padding: 10px 30px; border-radius: 40px;
+  display: flex; gap: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
-.dock-item { font-size: 32px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
-.dock-item img { width: 40px; height: 40px; border-radius: 10px; }
+
+.dock div { font-size: 36px; }
