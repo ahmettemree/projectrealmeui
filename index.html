@@ -306,3 +306,15 @@ window.onload = function() {
     }, 2000);
 };
 </script>
+<!-- DEBUG PANEL (Sadece telefon için) -->
+<div class="debug-panel" style="position: fixed; top: 10px; left: 10px; background: red; color: white; padding: 10px; z-index: 9999;">
+    <button onclick="forceUnlock()">FORCE UNLOCK</button>
+    <button onclick="showDebug()">DEBUG</button>
+</div>
+
+<script>
+// EMERGENCY FUNCTIONS
+function forceUnlock() {
+    alert("FORCE UNLOCK ÇALIŞTI!");
+    
+    // 1. Kilit
