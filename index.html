@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Realme Web OS</title>
 
-  <!-- CSS burada -->
-  <link rel="stylesheet" href="style.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- Status Bar -->
   <header class="status-bar">
     <span>Realme Web OS</span>
     <span id="clock"></span>
   </header>
 
+  <!-- Home -->
   <main class="home">
-    <div class="app" onclick="openApp('Ayarlar')">⚙️<span>Ayarlar</span></div>
-    <div class="app" onclick="openApp('Tarayıcı')">🌐<span>Tarayıcı</span></div>
-    <div class="app" onclick="openApp('Dosyalar')">📁<span>Dosyalar</span></div>
-    <div class="app" onclick="openApp('Kamera')">📷<span>Kamera</span></div>
+    <div class="app" onclick="openApp()">⚙️<span>Ayarlar</span></div>
+    <div class="app" onclick="openApp()">🌐<span>Tarayıcı</span></div>
+    <div class="app" onclick="openApp()">📁<span>Dosyalar</span></div>
+    <div class="app" onclick="openApp()">📷<span>Kamera</span></div>
   </main>
 
+  <!-- Dock -->
   <footer class="dock">
-    <button onclick="openApp('Telefon')">📞</button>
-    <button onclick="openApp('Mesajlar')">💬</button>
-    <button onclick="openApp('Chrome')">🌍</button>
+    <button onclick="openApp()">📞</button>
+    <button onclick="openApp()">💬</button>
+    <button onclick="openApp()">🌍</button>
   </footer>
 
+  <!-- App Window -->
   <div id="appWindow" class="app-window hidden">
     <div class="app-header">
-      <span id="appTitle"></span>
+      <span>Uygulama</span>
       <button onclick="closeApp()">✕</button>
     </div>
     <div class="app-content">
@@ -38,7 +42,7 @@
     </div>
   </div>
 
-  <!-- JS burada -->
+  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>
