@@ -3,96 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TemreOS v1.0 - Personal Android Experience</title>
+    <title>TemreOS Beta V.03</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Toast Notification */
-        #appToast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 14px;
-            z-index: 99999;
-            animation: toastSlide 0.3s ease;
-            display: none;
-        }
-        
-        @keyframes toastSlide {
-            from { top: -50px; opacity: 0; }
-            to { top: 20px; opacity: 1; }
-        }
-        
-        /* Loading Spinner */
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Beta Badge */
-        .beta-badge {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #0088cc, #00aced);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
-            z-index: 9999;
-        }
-        
-        .beta-link {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-    </style>
 </head>
 <body>
-    <!-- Beta Badge -->
-    <div class="beta-badge">
-        <span class="beta-text">BETA v1.0</span>
-        <a href="https://t.me/temreos_beta" target="_blank" class="beta-link">
-            <i class="fab fa-telegram"></i> Bug Report
-        </a>
+    <!-- Android Boot Screen -->
+    <div class="boot-screen" id="bootScreen">
+        <div class="boot-content">
+            <div class="android-logo">
+                <svg viewBox="0 0 24 24" width="80" height="80">
+                    <path fill="#3DDC84" d="M6,18c0,0.55 0.45,1 1,1h1v3.5c0,0.83 0.67,1.5 1.5,1.5s1.5,-0.67 1.5,-1.5L11,19h2v3.5c0,0.83 0.67,1.5 1.5,1.5s1.5,-0.67 1.5,-1.5L16,19h1c0.55,0 1,-0.45 1,-1L18,8L6,8v10zM3.5,8C2.67,8 2,8.67 2,9.5v7c0,0.83 0.67,1.5 1.5,1.5S5,17.33 5,16.5v-7C5,8.67 4.33,8 3.5,8zM20.5,8c-0.83,0 -1.5,0.67 -1.5,1.5v7c0,0.83 0.67,1.5 1.5,1.5s1.5,-0.67 1.5,-1.5v-7c0,-0.83 -0.67,-1.5 -1.5,-1.5zM15.53,3.16l1.3,-1.3c0.2,-0.2 0.2,-0.51 0,-0.71 -0.2,-0.2 -0.51,-0.2 -0.71,0l-1.48,1.48C13.85,2.23 12.95,2 12,2c-0.96,0 -1.86,0.23 -2.66,0.63L7.85,1.15c-0.2,-0.2 -0.51,-0.2 -0.71,0 -0.2,0.2 -0.2,0.51 0,0.71l1.31,1.31C6.97,3.26 6,4.46 6,6c0,0.68 0.21,1.32 0.58,1.84C6.21,8.32 6,8.68 6,9v1h12V9c0,-0.32 -0.21,-0.68 -0.58,-0.84C17.79,7.32 18,6.68 18,6c0,-1.54 -0.97,-2.74 -2.47,-2.84zM10,5.5c0,0.83 -0.67,1.5 -1.5,1.5S7,6.33 7,5.5 7.67,4 8.5,4s1.5,0.67 1.5,1.5zM17,5.5c0,0.83 -0.67,1.5 -1.5,1.5s-1.5,-0.67 -1.5,-1.5S14.67,4 15.5,4s1.5,0.67 1.5,1.5z"/>
+                </svg>
+            </div>
+            <div class="boot-text">
+                <div class="powered-by">Powered by Android</div>
+                <div class="os-name">TemreOS</div>
+                <div class="os-version">Beta V.03</div>
+            </div>
+            <div class="boot-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="appToast"></div>
+    <!-- Lock Screen -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="status-bar">
+            <div class="status-time">00:00</div>
+            <div class="status-icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+        
+        <div class="lock-content">
+            <div class="lock-time" id="lockTime">00:00</div>
+            <div class="lock-date" id="lockDate">1 Ocak Pzt</div>
+            
+            <div class="lock-bottom">
+                <div class="fingerprint-area" onclick="unlockWithFingerprint()">
+                    <div class="fingerprint-icon">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <div class="fingerprint-text">Parmak izi ile aç</div>
+                </div>
+                <div class="swipe-hint">
+                    <i class="fas fa-arrow-up"></i>
+                    Yukarı kaydırarak kilidi aç
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Android Device -->
-    <div class="android-phone">
-        <!-- Status Bar -->
+    <!-- Home Screen -->
+    <div class="home-screen" id="homeScreen">
         <div class="status-bar">
             <div class="status-left">
-                <span class="time">00:51</span>
-                <i class="fas fa-lock status-icon"></i>
+                <span class="time">00:00</span>
             </div>
-            <div class="status-center">vodafone TR</div>
             <div class="status-right">
                 <i class="fas fa-signal"></i>
                 <i class="fas fa-wifi"></i>
@@ -100,203 +71,357 @@
             </div>
         </div>
 
-        <!-- Lock Screen -->
-        <div class="screen lock-screen active" id="lockScreen">
-            <div class="lock-content">
-                <div class="lock-time">00:51</div>
-                <div class="lock-date">12 Oca Pzt® 06:18</div>
-                
-                <div class="lock-notification">
-                    <div class="notification-icon">
-                        <i class="fas fa-bell"></i>
-                    </div>
-                    <div class="notification-text">
-                        <strong>Soma yine gel!</strong>
-                        <span>Şimdi</span>
-                    </div>
-                </div>
-                
-                <div class="unlock-area">
-                    <div class="unlock-hint">
-                        <i class="fas fa-chevron-up"></i>
-                        <span>Yukarı kaydırarak kilidi aç</span>
-                    </div>
-                    
-                    <div class="fingerprint" onclick="unlockWithFingerprint()">
-                        <i class="fas fa-fingerprint"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Home Screen -->
-        <div class="screen home-screen" id="homeScreen" style="display: none;">
-            <div class="search-widget">
-                <div class="search-bar" onclick="openSearch()">
-                    <i class="fas fa-search"></i>
-                    <span>Google'da ara veya URL yaz</span>
-                </div>
-                <div class="weather-widget">
-                    <i class="fas fa-sun"></i>
-                    <span>İstanbul • 6°</span>
-                </div>
-            </div>
-
+        <div class="home-content">
             <!-- App Grid -->
             <div class="app-grid">
                 <!-- Row 1 -->
-                <div class="app-folder" onclick="openFolder('Settings')">
-                    <div class="folder-apps">
-                        <div class="folder-app-icon"><i class="fas fa-cog"></i></div>
-                        <div class="folder-app-icon"><i class="fas fa-sliders-h"></i></div>
-                        <div class="folder-app-icon"><i class="fas fa-bell"></i></div>
+                <div class="app-icon" data-app="settings" onclick="openApp('settings')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #4285f4, #34a853);">
+                        <i class="fas fa-cog"></i>
                     </div>
-                    <span class="app-label">Settings/...</span>
+                    <span class="app-name">Ayarlar</span>
                 </div>
                 
-                <div class="app-icon" onclick="openApp('Shopping')">
-                    <div class="app-circle">
-                        <i class="fas fa-shopping-cart"></i>
+                <div class="app-icon" data-app="camera" onclick="openApp('camera')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #ea4335, #fbbc05);">
+                        <i class="fas fa-camera"></i>
                     </div>
-                    <span class="app-label">Shopping</span>
+                    <span class="app-name">Kamera</span>
                 </div>
                 
-                <div class="app-icon" onclick="openApp('Productivity')">
-                    <div class="app-circle">
-                        <i class="fas fa-tasks"></i>
+                <div class="app-icon" data-app="messages" onclick="openApp('messages')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #34a853, #4285f4);">
+                        <i class="fas fa-comment-alt"></i>
                     </div>
-                    <span class="app-label">Productiv...</span>
+                    <span class="app-name">Mesajlar</span>
+                </div>
+                
+                <div class="app-icon" data-app="phone" onclick="openApp('phone')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #fbbc05, #ea4335);">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <span class="app-name">Telefon</span>
                 </div>
 
                 <!-- Row 2 -->
-                <div class="app-icon" onclick="openApp('Games')">
-                    <div class="app-circle">
-                        <i class="fas fa-gamepad"></i>
+                <div class="app-icon" data-app="chrome" onclick="openApp('chrome')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #4285f4, #0d47a1);">
+                        <i class="fab fa-chrome"></i>
                     </div>
-                    <span class="app-label">Games</span>
+                    <span class="app-name">Chrome</span>
                 </div>
                 
-                <div class="app-icon" onclick="openApp('Social')">
-                    <div class="app-circle">
-                        <i class="fas fa-users"></i>
+                <div class="app-icon" data-app="gallery" onclick="openApp('gallery')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #9c27b0, #673ab7);">
+                        <i class="fas fa-images"></i>
                     </div>
-                    <span class="app-label">Social</span>
+                    <span class="app-name">Galeri</span>
                 </div>
                 
-                <div class="app-icon" onclick="openApp('Play Store')">
-                    <div class="app-circle">
-                        <i class="fab fa-google-play"></i>
+                <div class="app-icon" data-app="music" onclick="openApp('music')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #ff5722, #ff9800);">
+                        <i class="fas fa-music"></i>
                     </div>
-                    <span class="app-label">Play Store</span>
+                    <span class="app-name">Müzik</span>
+                </div>
+                
+                <div class="app-icon" data-app="files" onclick="openApp('files')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #795548, #8d6e63);">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <span class="app-name">Dosyalar</span>
                 </div>
 
                 <!-- Row 3 -->
-                <div class="app-icon" onclick="openApp('Weather')">
-                    <div class="app-circle">
+                <div class="app-icon" data-app="calendar" onclick="openApp('calendar')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #2196f3, #03a9f4);">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span class="app-name">Takvim</span>
+                </div>
+                
+                <div class="app-icon" data-app="calculator" onclick="openApp('calculator')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #607d8b, #78909c);">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <span class="app-name">Hesap Mak.</span>
+                </div>
+                
+                <div class="app-icon" data-app="weather" onclick="openApp('weather')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #00bcd4, #0097a7);">
                         <i class="fas fa-cloud-sun"></i>
                     </div>
-                    <span class="app-label">Hava dur...</span>
+                    <span class="app-name">Hava Durumu</span>
                 </div>
                 
-                <div class="app-icon" onclick="openGoogle()">
-                    <div class="app-circle">
-                        <i class="fab fa-google"></i>
+                <div class="app-icon" data-app="notes" onclick="openApp('notes')">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #ffeb3b, #fbc02d);">
+                        <i class="fas fa-sticky-note"></i>
                     </div>
-                    <span class="app-label">Google</span>
-                </div>
-                
-                <div class="app-icon" onclick="openApp('Chrome')">
-                    <div class="app-circle">
-                        <i class="fab fa-chrome"></i>
-                    </div>
-                    <span class="app-label">Chrome ...</span>
-                </div>
-
-                <!-- Row 4 -->
-                <div class="app-icon" onclick="openApp('Fazilet')">
-                    <div class="app-circle">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <span class="app-label">Fazilet...</span>
-                </div>
-                
-                <div class="app-icon" onclick="openApp('Duolingo')">
-                    <div class="app-circle">
-                        <i class="fas fa-language"></i>
-                    </div>
-                    <span class="app-label">Duolingo</span>
-                </div>
-                
-                <div class="app-icon" onclick="openApp('Proton')">
-                    <div class="app-circle">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <span class="app-label">Proton V...</span>
-                </div>
-
-                <!-- Row 5 -->
-                <div class="app-icon" onclick="openApp('Files')">
-                    <div class="app-circle">
-                        <i class="fas fa-folder"></i>
-                    </div>
-                    <span class="app-label">Files</span>
-                </div>
-                
-                <div class="app-icon" onclick="openApp('Gmail')">
-                    <div class="app-circle">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <span class="app-label">Gmail</span>
-                </div>
-                
-                <div class="app-icon" onclick="openApp('Camera')">
-                    <div class="app-circle">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <span class="app-label">Camera</span>
+                    <span class="app-name">Notlar</span>
                 </div>
             </div>
 
             <!-- Dock -->
             <div class="app-dock">
-                <div class="dock-icon" onclick="openApp('Phone')">
+                <div class="dock-icon" onclick="openApp('phone')">
                     <i class="fas fa-phone"></i>
                 </div>
-                <div class="dock-icon" onclick="openApp('Messages')">
-                    <i class="fas fa-message"></i>
+                <div class="dock-icon" onclick="openApp('messages')">
+                    <i class="fas fa-comment-alt"></i>
                 </div>
-                <div class="dock-icon active" onclick="openApp('Home')">
-                    <i class="fas fa-circle"></i>
-                </div>
-                <div class="dock-icon" onclick="openApp('Camera')">
+                <div class="dock-icon" onclick="openApp('camera')">
                     <i class="fas fa-camera"></i>
                 </div>
-                <div class="dock-icon" onclick="openApp('Browser')">
+                <div class="dock-icon" onclick="openApp('browser')">
                     <i class="fas fa-globe"></i>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- App Window -->
-        <div class="app-window" id="appWindow" style="display: none;">
-            <div class="app-header">
-                <button class="back-btn" onclick="closeApp()">‹</button>
-                <h3 id="appTitle">Uygulama</h3>
+    <!-- App Windows -->
+    <div class="app-window" id="appWindow">
+        <div class="app-header">
+            <button class="back-btn" onclick="closeApp()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h3 class="app-title" id="appTitle">Uygulama</h3>
+            <div class="app-actions">
+                <i class="fas fa-ellipsis-v"></i>
             </div>
-            <div class="app-content" id="appContent">
-                <!-- App content will be loaded here -->
+        </div>
+        <div class="app-content" id="appContent">
+            <!-- App content will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Settings App Content (Hidden Template) -->
+    <div id="settingsContent" style="display: none;">
+        <div class="settings-container">
+            <!-- Header -->
+            <div class="settings-header">
+                <h2><i class="fas fa-cog"></i> Ayarlar</h2>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Ayarlarda ara">
+                </div>
+            </div>
+
+            <!-- Settings Categories -->
+            <div class="settings-categories">
+                <div class="settings-section">
+                    <h3><i class="fas fa-wifi"></i> Bağlantı</h3>
+                    <div class="settings-item toggle" onclick="toggleSetting('wifi')">
+                        <div class="item-info">
+                            <i class="fas fa-wifi"></i>
+                            <div>
+                                <strong>Wi-Fi</strong>
+                                <small>Bağlı: HomeWiFi</small>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="wifiToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item toggle" onclick="toggleSetting('bluetooth')">
+                        <div class="item-info">
+                            <i class="fas fa-bluetooth"></i>
+                            <div>
+                                <strong>Bluetooth</strong>
+                                <small>Kapalı</small>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="bluetoothToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3><i class="fas fa-palette"></i> Görünüm</h3>
+                    <div class="settings-item toggle" onclick="toggleSetting('darkMode')">
+                        <div class="item-info">
+                            <i class="fas fa-moon"></i>
+                            <div>
+                                <strong>Karanlık Mod</strong>
+                                <small>Gün batımında aç</small>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item" onclick="openThemeSelector()">
+                        <div class="item-info">
+                            <i class="fas fa-fill-drip"></i>
+                            <div>
+                                <strong>Tema Rengi</strong>
+                                <small>Mavi • Özel</small>
+                            </div>
+                        </div>
+                        <div class="color-preview" style="background: #4285f4;"></div>
+                    </div>
+                    
+                    <div class="settings-item" onclick="openWallpaperPicker()">
+                        <div class="item-info">
+                            <i class="fas fa-image"></i>
+                            <div>
+                                <strong>Duvar Kağıdı</strong>
+                                <small>Varsayılan</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3><i class="fas fa-magic"></i> Animasyonlar</h3>
+                    <div class="settings-item toggle" onclick="toggleSetting('animations')">
+                        <div class="item-info">
+                            <i class="fas fa-play-circle"></i>
+                            <div>
+                                <strong>Animasyonlar</strong>
+                                <small>Açık • 1x hız</small>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="animationsToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item" onclick="changeAnimationSpeed()">
+                        <div class="item-info">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <div>
+                                <strong>Animasyon Hızı</strong>
+                                <small>Normal</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3><i class="fas fa-mobile-alt"></i> Cihaz Hakkında</h3>
+                    <div class="settings-item info" onclick="showDeviceInfo()">
+                        <div class="item-info">
+                            <i class="fas fa-info-circle"></i>
+                            <div>
+                                <strong>Cihaz Bilgileri</strong>
+                                <small>TemreOS Beta V.03</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="device-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-microchip"></i>
+                            <div>
+                                <strong>İşlemci</strong>
+                                <span>Snapdragon 8 Gen 2</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <i class="fas fa-memory"></i>
+                            <div>
+                                <strong>Bellek</strong>
+                                <span>12 GB RAM</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <i class="fas fa-hdd"></i>
+                            <div>
+                                <strong>Depolama</strong>
+                                <span>256 GB (187 GB boş)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <i class="fas fa-battery-full"></i>
+                            <div>
+                                <strong>Pil</strong>
+                                <span>%78 • 5h 42m kaldı</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-item" onclick="checkForUpdates()">
+                        <div class="item-info">
+                            <i class="fas fa-sync-alt"></i>
+                            <div>
+                                <strong>Yazılım Güncelleme</strong>
+                                <small>TemreOS Beta V.03 • Güncel</small>
+                            </div>
+                        </div>
+                        <div class="update-badge">GÜNCEL</div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3><i class="fas fa-shield-alt"></i> Güvenlik</h3>
+                    <div class="settings-item" onclick="openSecuritySettings()">
+                        <div class="item-info">
+                            <i class="fas fa-fingerprint"></i>
+                            <div>
+                                <strong>Parmak İzi</strong>
+                                <small>2 parmak kayıtlı</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="settings-item toggle" onclick="toggleSetting('faceUnlock')">
+                        <div class="item-info">
+                            <i class="fas fa-user-check"></i>
+                            <div>
+                                <strong>Yüz Tanıma</strong>
+                                <small>Kapalı</small>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="faceUnlockToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Controls -->
-    <div class="controls">
-        <button onclick="lockScreen()"><i class="fas fa-lock"></i> Kilitle</button>
-        <button onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i> Tema</button>
-        <button onclick="location.reload()"><i class="fas fa-redo"></i> Yenile</button>
+    <!-- Camera App Content -->
+    <div id="cameraContent" style="display: none;">
+        <div class="camera-container">
+            <div class="camera-viewfinder"></div>
+            <div class="camera-controls">
+                <button class="camera-btn" onclick="takePhoto()">
+                    <div class="shutter-circle"></div>
+                </button>
+                <div class="camera-mode">Fotoğraf</div>
+            </div>
+        </div>
     </div>
+
+    <!-- Other App Contents -->
+    <div id="messagesContent" style="display: none;">
+        <div class="messages-container">
+            <h3><i class="fas fa-comment-alt"></i> Mesajlar</h3>
+            <p>Henüz mesaj yok</p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <script src="script.js"></script>
 </body>
-                    </html>
-                    
+                                    </html>
