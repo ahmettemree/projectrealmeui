@@ -11,25 +11,37 @@ let dialerNumber = '';
 document.addEventListener('DOMContentLoaded', function() {
     console.log("📱 TemreOS V.04 yükleniyor...");
     
-    // 1. İlk boot ekranını göster (5 saniye)
+    // HIZLI BOOT: 1. ekran 1.5 sn, 2. ekran 1.5 sn
     setTimeout(() => {
-        // İlk ekrandan ikinciye geç (animasyonsuz)
+        // İlk ekrandan ikinciye geç
         document.getElementById('bootScreen1').style.display = 'none';
         document.getElementById('bootScreen2').style.display = 'flex';
         
-        // 2. İkinci boot ekranı (5 saniye)
+        // 2. İkinci boot ekranı (1.5 sn)
         setTimeout(() => {
             // Boot ekranını kapat
             document.getElementById('bootScreen2').classList.add('exit');
             
-            // 3. Kilit ekranını göster
+            // Kilit ekranını göster
             setTimeout(() => {
                 document.getElementById('bootScreen2').style.display = 'none';
                 showLockScreen();
                 updateTime();
-            }, 800); // Exit animasyonu süresi
-        }, 5000); // 2. ekran 5 saniye
-    }, 5000); // 1. ekran 5 saniye
+            }, 500); // Exit animasyonu
+        }, 1500); // 2. ekran 1.5 saniye
+    }, 1500); // 1. ekran 1.5 saniye
+    
+    // Saat güncellemesi
+    setInterval(updateTime, 60000);
+    
+    // Tema yükle
+    loadTheme();
+    
+    // Kaydırma event'leri
+    initSwipeGestures();
+    
+    console.log("✅ TemreOS V.04 hazır!");
+});
     
     // Saat güncellemesi
     setInterval(updateTime, 60000);
