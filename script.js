@@ -152,3 +152,145 @@ window.skipBoot = skipBoot;
 window.unlockPhone = unlockPhone;
 
 console.log("✨ TemreOS V.04 Boot Fix hazır!");
+
+// ===== KİLİT EKRANI FİX =====
+
+// 1. PARMAK İZİ ÇALIŞTIR
+function unlockWithFingerprint() {
+    console.log("👆 Parmak izi taranıyor...");
+    
+    const fingerprintIcon = document.querySelector('.fingerprint-icon');
+    if (!fingerprintIcon) {
+        console.error("❌ Parmak izi ikonu bulunamadı!");
+        return;
+    }
+    
+    // Animasyon başlat
+    fingerprintIcon.classList.add('scanning');
+    showToast("👆 Parmak izi taranıyor...");
+    
+    // 2 saniye sonra aç
+    setTimeout(() => {
+        unlockPhone();
+        
+        // Animasyonu sıfırla
+        setTimeout(() => {
+            fingerprintIcon.classList.remove('scanning');
+        }, 500);
+    }, 2000);
+}
+
+// 2. KAYDIRMA ÇALIŞTIR
+function initSwipeGestures() {
+    const lockScreen = document.getElementById('lockScreen');
+    if (!lockScreen) {
+        console.error("❌ Lock screen bulunamadı!");
+        return;
+    }
+    
+    console.log("🔄 Kaydırma gesture'ları başlatılıyor...");
+    
+    let startY = 0;
+    let isSwiping = false;
+    
+    // Touch events
+    lockScreen.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        isSwiping = true;
+        this.style.transition = 'none';
+    });
+    
+    lockScreen.addEventListener('touchmove', function(e) {
+        if (!isSwiping) return;
+        
+        const currentY = e.touches[0].clientY;
+        const diff = startY - currentY;
+        
+        if (diff > 0) {
+            const translateY = Math.min(diff, 100);
+            this.style.transform = `translateY(-${translateY}px)`;
+            this.style.opacity = 1 - (translateY / 200);
+        }
+    });
+    
+    lockScreen.addEventListener('touchend', function() {
+        if (!isSwiping) return;
+        isSwiping = false;
+        
+        const diff = startY - currentY;
+        
+        if (diff > 50) {
+            console.log("⬆️ Yukarı kaydırma algılandı, açılıyor...");
+            unlockPhone();
+        } else {
+            this.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+            this.style.transform = 'translateY(0)';
+            this.style.opacity = '1';
+        }
+    });
+    
+    // Mouse events (PC için)
+    lockScreen.addEventListener('mousedown', function(e) {
+        startY = e.clientY;
+        isSwiping = true;
+        this.style.transition = 'none';
+    });
+    
+    document.addEventListener('mousemove', function(e) {
+        if (!isSwiping) return;
+        
+        const lockScreen = document.getElementById('lockScreen');
+        const currentY = e.clientY;
+        const diff = startY - currentY;
+        
+        if (diff > 0) {
+            const translateY = Math.min(diff, 100);
+            lockScreen.style.transform = `translateY(-${translateY}px)`;
+            lockScreen.style.opacity = 1 - (translateY / 200);
+        }
+    });
+    
+    document.addEventListener('mouseup', function() {
+        if (!isSwiping) return;
+        isSwiping = false;
+        
+        const lockScreen = document.getElementById('lockScreen');
+        const diff = startY - currentY;
+        
+        if (diff > 50) {
+            console.log("⬆️ Mouse kaydırma algılandı, açılıyor...");
+            unlockPhone();
+        } else {
+            lockScreen.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+            lockScreen.style.transform = 'translateY(0)';
+            lockScreen.style.opacity = '1';
+        }
+    });
+}
+
+// 3. GLOBAL FONKSİYONLARI TEKRAR TANIMLA
+window.unlockWithFingerprint = unlockWithFingerprint;
+window.unlockPhone = unlockPhone;
+window.skipBoot = skipBoot;
+
+// 4. SAYFA YÜKLENDİĞİNDE KONTROL ET
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("🔍 Kilit ekranı kontrol ediliyor...");
+    
+    // Kilit ekranı var mı?
+    const lockScreen = document.getElementById('lockScreen');
+    console.log("Lock screen:", lockScreen ? "BULUNDU" : "BULUNAMADI");
+    
+    // Parmak izi butonu var mı?
+    const fingerprintBtn = document.querySelector('.fingerprint-area');
+    console.log("Parmak izi butonu:", fingerprintBtn ? "BULUNDU" : "BULUNAMADI");
+    
+    // Event listener'ları ekle
+    if (fingerprintBtn) {
+        fingerprintBtn.onclick = unlockWithFingerprint;
+        console.log("✅ Parmak izi event'i eklendi");
+    }
+    
+    // Kaydırma gesture'larını başlat
+    initSwipeGestures();
+});
